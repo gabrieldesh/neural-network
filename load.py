@@ -19,13 +19,28 @@ def load_dataset(filename):
 
 
 def load_network_structure(filename):
-  # TODO
+  with open(filename, 'r') as f:
+    regularization = float(f.readline())
+
+    layer_sizes = []
+    line = f.readline()
+    while line:
+      layer_sizes.append(int(line))
+      line = f.readline()
+
   return {
-    'regularization': 0.0,
-    'layer_sizes': [1, 2, 1]
+    'regularization': regularization,
+    'layer_sizes': layer_sizes
   }
 
 
 def load_weights(filename):
-  # TODO: Retornar matrizes de pesos para vetorização.
-  return None
+  with open(filename, 'r') as f:
+    weight_matrices = []
+    line = f.readline()
+    while line:
+      matrix = np.array(np.mat(line))
+      weight_matrices.append(matrix)
+      line = f.readline()
+  
+  return weight_matrices
