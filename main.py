@@ -41,7 +41,7 @@ dataset = load.load_dataset(dataset_name)
 network_structure = load.load_network_structure(network_filename)
 initial_weights = generate_random_weights(network_structure)
 
-dataset = normalize_features(dataset)
+normalize_features(dataset)
 
 confusion_matrices = f1.eval_confusion_matrices(dataset, network_structure, initial_weights, 
                                                 learning_rate, momentum, batch_size, k)
