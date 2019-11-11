@@ -29,7 +29,7 @@ if len(sys.argv) >= 3:
     if len(sys.argv) >= 9:
         posclass = sys.argv[8]
 else:
-    print("\nUsage:\t python main.py network dataset_name [learning_rate] [momentum] [batch_size] [k] [seed] "
+    print("\nUsage:\t python main.py network dataset [learning_rate] [momentum] [batch_size] [k] [seed] "
           "[positive_class_value]\n")
     sys.exit()
 

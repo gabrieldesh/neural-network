@@ -10,14 +10,14 @@ if len(sys.argv) >= 4:
     weights_filename = sys.argv[2]
     dataset_name = sys.argv[3]
 else:
-    print("\nUsage:\t python backpropagation.py network weights dataset_name\n")
+    print("\nUsage:\t python backpropagation.py network weights dataset\n")
     sys.exit()
 
 dataset = load.load_dataset(dataset_name)
 network_structure = load.load_network_structure(network_filename)
 initial_weights = load.load_weights(weights_filename)
 
-dataset = normalize_features(dataset)
+normalize_features(dataset)
 
 # Calcula gradientes usando todas as instâncias do dataset.
 dataset_size = 0 # TODO: Calcular tamanho do dataset.
