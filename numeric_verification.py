@@ -1,8 +1,8 @@
 from predict import predict
 import numpy as np
 
-def verify(dataset, network_structure, initial_weights):
-  epsilon = 0.01
+def verify(dataset, initial_weights, regularization):
+  epsilon = 0.000001
   gradients = []
 
   for theta in initial_weights:
@@ -12,10 +12,10 @@ def verify(dataset, network_structure, initial_weights):
         v = theta[i, j]
 
         theta[i, j] = v - epsilon
-        J0 = J(dataset, network_structure, initial_weights)
+        J0 = J(dataset, initial_weights, regularization)
 
         theta[i, j] = v + epsilon
-        J1 = J(dataset, network_structure, initial_weights)
+        J1 = J(dataset, initial_weights, regularization)
 
         # Restaura o valor do peso
         theta[i, j] = v
@@ -25,12 +25,12 @@ def verify(dataset, network_structure, initial_weights):
   
   return gradients
 
-def J(dataset, network_structure, weights):
+def J(dataset, weights, regularization):
   sum = 0
   for instance in dataset:
     x = instance['input']
     y = instance['output']
-    fx = predict(x, network_structure, weights)
+    fx = predict(x, weights)
     errors = -y * np.log(fx) - (1 - y) * np.log(1 - fx)
     sum += np.sum(errors) # Soma erros de cada saída.  
   mean_error = sum / len(dataset)
@@ -40,6 +40,6 @@ def J(dataset, network_structure, weights):
     for i in range(matrix.shape[0]):
       for j in range(1, matrix.shape[1]): # Ignora pesos de bias
         regularization_term += matrix[i, j] ** 2
-  regularization_term *= network_structure['regularization'] / (2 * len(dataset))
+  regularization_term *= regularization / (2 * len(dataset))
 
   return mean_error + regularization_term

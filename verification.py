@@ -14,10 +14,10 @@ else:
     sys.exit()
 
 dataset = load.load_dataset(dataset_name)
-network_structure = load.load_network_structure(network_filename)
+network = load.load_network_structure(network_filename)
 initial_weights = load.load_weights(weights_filename)
 
 normalize_features(dataset)
 
-gradients = verify(dataset, network_structure, initial_weights)
+gradients = verify(dataset, initial_weights, network['regularization'])
 print_gradients(gradients)

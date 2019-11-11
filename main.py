@@ -38,11 +38,11 @@ if (seed != None):
     numpy.random.seed(seed)
 
 dataset = load.load_dataset(dataset_name)
-network_structure = load.load_network_structure(network_filename)
-initial_weights = generate_random_weights(network_structure)
+network = load.load_network_structure(network_filename)
+initial_weights = generate_random_weights(network['layer_sizes'])
 
 normalize_features(dataset)
 
-confusion_matrices = f1.eval_confusion_matrices(dataset, network_structure, initial_weights, 
+confusion_matrices = f1.eval_confusion_matrices(dataset, initial_weights, network['regularization'],
                                                 learning_rate, momentum, batch_size, k)
 f1.eval_f1measure(confusion_matrices, posclass)

@@ -2,7 +2,7 @@ import cross_validation as cv
 from train import backpropagation
 from predict import predict_all
 
-def eval_confusion_matrices(dataset, network_structure, initial_weights, 
+def eval_confusion_matrices(dataset, initial_weights, regularization,
                             learning_rate, momentum, batch_size, k):
 
     cvset = cv.cross_validation(dataset,k)
@@ -11,9 +11,9 @@ def eval_confusion_matrices(dataset, network_structure, initial_weights,
     for i in range(k):
         target = cvset[i]['testSet']['target']
         print('Generating neural net for the k-fold {}'.format(i))
-        weights = backpropagation(cvset[i]['trainingSet'], network_structure, initial_weights, 
+        weights = backpropagation(cvset[i]['trainingSet'], initial_weights, regularization,
                                               learning_rate, momentum, batch_size)
-        predictions = predict_all(cvset[i]['testSet'], network_structure, weights)
+        predictions = predict_all(cvset[i]['testSet'], weights)
         result = {}
         vals = []
         for val in cvset[i]['testSet']['attributes'][target]['values']:

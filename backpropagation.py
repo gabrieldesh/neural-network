@@ -14,12 +14,12 @@ else:
     sys.exit()
 
 dataset = load.load_dataset(dataset_name)
-network_structure = load.load_network_structure(network_filename)
+network = load.load_network_structure(network_filename)
 initial_weights = load.load_weights(weights_filename)
 
 normalize_features(dataset)
 
 # Calcula gradientes usando todas as instâncias do dataset.
-gradients = train.calculate_gradients(dataset, 0, len(dataset), network_structure, initial_weights)
+gradients = train.calculate_gradients(dataset, 0, len(dataset), initial_weights, network['regularization'])
 
 print_gradients(gradients)
