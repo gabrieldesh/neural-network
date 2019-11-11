@@ -20,7 +20,7 @@ def verify(dataset, network_structure, initial_weights):
         # Restaura o valor do peso
         theta[i, j] = v
 
-        gradient_matrix[i, j] = (J1 - J0) / 2 * epsilon
+        gradient_matrix[i, j] = (J1 - J0) / (2 * epsilon)
     gradients.append(gradient_matrix)
   
   return gradients
@@ -32,6 +32,14 @@ def J(dataset, network_structure, weights):
     y = instance['output']
     fx = predict(x, network_structure, weights)
     errors = -y * np.log(fx) - (1 - y) * np.log(1 - fx)
-    sum += np.sum(errors) # Soma erros de cada saída.
-    
-  return sum
+    sum += np.sum(errors) # Soma erros de cada saída.  
+  mean_error = sum / len(dataset)
+
+  regularization_term = 0
+  for matrix in weights:
+    for i in range(matrix.shape[0]):
+      for j in range(1, matrix.shape[1]): # Ignora pesos de bias
+        regularization_term += matrix[i, j] ** 2
+  regularization_term *= network_structure['regularization'] / (2 * len(dataset))
+
+  return mean_error + regularization_term

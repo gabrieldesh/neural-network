@@ -1,4 +1,4 @@
-def calculate_gradients(dataset, batch_size, start_index, network_structure, weights):
+def calculate_gradients(dataset, start_index, batch_size, network_structure, weights):
   # TODO Calcular e retornar gradientes para 1 mini-batch. start_index é o índice da primeira instância
   # do mini-batch.
   return None
