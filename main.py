@@ -3,6 +3,7 @@ import f1measure as f1
 import random
 import numpy
 import load
+from train import backpropagation
 from random_weights import generate_random_weights
 from normalize import normalize_features
 
@@ -16,7 +17,7 @@ if len(sys.argv) >= 3:
     momentum = 1.0
     if len(sys.argv) >= 5:
         momentum = float(sys.argv[4])
-    batch_size = 50
+    batch_size = 1
     if len(sys.argv) >= 6:
         batch_size = int(sys.argv[5])
     k = 5
@@ -25,12 +26,8 @@ if len(sys.argv) >= 3:
     seed = None
     if len(sys.argv) >= 8:
         seed = int(sys.argv[7])
-    posclass = None
-    if len(sys.argv) >= 9:
-        posclass = sys.argv[8]
 else:
-    print("\nUsage:\t python main.py network dataset [learning_rate] [momentum] [batch_size] [k] [seed] "
-          "[positive_class_value]\n")
+    print("\nUsage:\t python main.py network dataset [learning_rate] [momentum] [batch_size] [k] [seed]\n")
     sys.exit()
 
 if (seed != None):
@@ -43,6 +40,8 @@ initial_weights = generate_random_weights(network['layer_sizes'])
 
 normalize_features(dataset)
 
-confusion_matrices = f1.eval_confusion_matrices(dataset, initial_weights, network['regularization'],
-                                                learning_rate, momentum, batch_size, k)
-f1.eval_f1measure(confusion_matrices, posclass)
+backpropagation(dataset, initial_weights, network['regularization'], learning_rate, momentum, batch_size)
+
+# confusion_matrices = f1.eval_confusion_matrices(dataset, initial_weights, network['regularization'],
+#                                                 learning_rate, momentum, batch_size, k)
+# f1.eval_f1measure(confusion_matrices)

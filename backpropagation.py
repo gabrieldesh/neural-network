@@ -1,7 +1,7 @@
 import sys
 import load
 from normalize import normalize_features
-from print_gradients import print_gradients
+from print_matrices import print_matrices
 import train
 
 
@@ -22,4 +22,4 @@ normalize_features(dataset)
 # Calcula gradientes usando todas as instâncias do dataset.
 gradients = train.calculate_gradients(dataset, 0, len(dataset), initial_weights, network['regularization'])
 
-print_gradients(gradients)
+print_matrices(gradients)

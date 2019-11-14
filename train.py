@@ -1,11 +1,13 @@
 import numpy as np
 from predict import propagate
+from print_matrices import print_matrices
+from cost import J
 
 def calculate_gradients(dataset, start_index, batch_size, weights, regularization):
   # Inicializa os acumuladores de gradientes
   D = []
-  for matrix in weights:
-    D.append(np.zeros(matrix.shape))
+  for weight_matrix in weights:
+    D.append(np.zeros(weight_matrix.shape))
 
   # Calcula os gradientes para cada instância
   for i in range(start_index, start_index + batch_size):
@@ -39,6 +41,40 @@ def calculate_gradients(dataset, start_index, batch_size, weights, regularizatio
 
 
 def backpropagation(dataset, initial_weights, regularization, learning_rate, momentum, batch_size):
-  # TODO Usar a calculate_gradients repetidamente para treinar a rede neural em mini-batches, até atingir um
-  # critério de parada.
-  return None
+  start_index = 0
+
+  # Copia matrizes de initial_weights
+  weights = []
+  for weight_matrix in initial_weights:
+    weights.append(np.array(weight_matrix))
+
+  # Inicializa valores de momento com 0
+  z = []
+  for weight_matrix in weights:
+    z.append(np.zeros(weight_matrix.shape))
+  
+  # Treina até que a melhoria obtida seja muito pequena
+  cost = J(dataset, weights, regularization)
+  while True:
+    # print('Pesos:')
+    # print_matrices(weights)
+    # print(f'Custo: {cost}')
+
+    gradients = calculate_gradients(dataset, start_index, batch_size, weights, regularization)
+
+    # Atualiza os pesos
+    for k in range(len(gradients)):
+      z[k] = momentum * z[k] + gradients[k]
+      weights[k] = weights[k] - learning_rate * z[k]
+    
+    new_cost = J(dataset, weights, regularization)
+    # print(f'Melhoria: {cost - new_cost}\n')
+    if 0 <= cost - new_cost  < 1e-4:
+      print(f'Treinamento concluído.')
+      print('Pesos:')
+      print_matrices(weights)
+      print(f'Custo: {cost}\n')
+      return weights
+    cost = new_cost
+
+    start_index = (start_index + batch_size) % len(dataset)

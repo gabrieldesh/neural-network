@@ -1,5 +1,5 @@
-def print_gradients(gradients):
-  for matrix in gradients:
+def print_matrices(matrices):
+  for matrix in matrices:
     for i in range(matrix.shape[0]):
       for j in range(matrix.shape[1]):
         print(f'{matrix[i, j] :.10f}', end='')

@@ -1,7 +1,7 @@
 import sys
 import load
 from normalize import normalize_features
-from print_gradients import print_gradients
+from print_matrices import print_matrices
 from numeric_verification import verify
 
 
@@ -20,4 +20,4 @@ initial_weights = load.load_weights(weights_filename)
 normalize_features(dataset)
 
 gradients = verify(dataset, initial_weights, network['regularization'])
-print_gradients(gradients)
+print_matrices(gradients)
