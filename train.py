@@ -53,13 +53,18 @@ def backpropagation(dataset, initial_weights, regularization, learning_rate, mom
   for weight_matrix in weights:
     z.append(np.zeros(weight_matrix.shape))
   
-  # Treina até que a melhoria obtida seja muito pequena
-  cost = J(dataset, weights, regularization)
-  while True:
-    # print('Pesos:')
-    # print_matrices(weights)
-    # print(f'Custo: {cost}')
+  # Treina até que ocorram muitas iterações sem melhoria
+  best_cost = J(dataset, weights, regularization)
+  best_weights = []
+  for weight_matrix in weights:
+    best_weights.append(np.array(weight_matrix))
+  
+  num_iterations_without_improvement = 0
 
+  print(f'Custo inicial: {best_cost}. Pesos iniciais:')
+  print_matrices(weights)
+  print('Iniciando treinamento.')
+  while num_iterations_without_improvement < 100:
     gradients = calculate_gradients(dataset, start_index, batch_size, weights, regularization)
 
     # Atualiza os pesos
@@ -68,13 +73,25 @@ def backpropagation(dataset, initial_weights, regularization, learning_rate, mom
       weights[k] = weights[k] - learning_rate * z[k]
     
     new_cost = J(dataset, weights, regularization)
-    # print(f'Melhoria: {cost - new_cost}\n')
-    if 0 <= cost - new_cost  < 1e-4:
-      print(f'Treinamento concluído.')
-      print('Pesos:')
-      print_matrices(weights)
-      print(f'Custo: {cost}\n')
-      return weights
-    cost = new_cost
+    if new_cost < best_cost:
+      best_cost = new_cost
+
+      best_weights = []
+      for weight_matrix in weights:
+        best_weights.append(np.array(weight_matrix))
+      
+      print(f'\nMelhoria de custo encontrada. Custo: {best_cost}. Pesos:')
+      print_matrices(best_weights)
+      print()
+
+      num_iterations_without_improvement = 0
+    else:
+      print(f'Custo: {new_cost}')
+      num_iterations_without_improvement += 1
 
     start_index = (start_index + batch_size) % len(dataset)
+  
+  print(f'Treinamento concluído. Custo: {best_cost}. Pesos:')
+  print_matrices(best_weights)
+
+  return best_weights
