@@ -13,7 +13,7 @@ def predict_all(dataset, weights):
   return predictions
 
 def classify(input_vector, weights):
-  a = propagate(input_vector, weights)[-1]
+  a = predict(input_vector, weights)
   for i in range(len(a)):
     if a[i][0] >= 0.5: a[i][0] = 1.0
     else: a[i][0] = 0.0
