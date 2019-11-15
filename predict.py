@@ -1,8 +1,23 @@
 import numpy as np
 
+def classify_all(dataset, weights):
+  classifications = {}
+  for i in range(len(dataset)):
+    classifications[i] = classify(dataset[i]['input'], weights)
+  return classifications
+
 def predict_all(dataset, weights):
-  # TODO Retornar uma lista com as predições para cada instância do dataset
-  return None
+  predictions = {}
+  for i in range(len(dataset)):
+    predictions[i] = predict(dataset[i]['input'], weights)
+  return predictions
+
+def classify(input_vector, weights):
+  a = propagate(input_vector, weights)[-1]
+  for i in range(len(a)):
+    if a[i][0] >= 0.5: a[i][0] = 1.0
+    else: a[i][0] = 0.0
+  return a
 
 def predict(input_vector, weights):
   # Retorna as ativações da camada de saída.
