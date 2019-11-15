@@ -34,7 +34,6 @@ def cross_validation(dataset, k):
             if numk == k: numk = 0
             kfolds[numk].append(class1[i])
             numk += 1
-        numk = 0
         for i in range(len(class0)):
             if numk == k: numk = 0
             kfolds[numk].append(class0[i])
@@ -50,7 +49,9 @@ def cross_validation(dataset, k):
                     freq0count += 1
             print('fold {} counts'.format(i))
             print(freq0count)
-            print(freq1count)"""
+            print(freq1count)
+            print(f'Total: {len(kfolds[i])}\n')"""
+            
         return kfolds
 
     # CASO 2: há mais de 1 output, deve-se preservar a quantidades de instancias "1" de cada output em cada fold
@@ -65,10 +66,10 @@ def cross_validation(dataset, k):
                 if dataset[i]['output'][j][0] == 1.0:
                     classes[j].append(dataset[i])
         
+        numk = 0
         for i in range(num_outputs):
 
             # coloca len(classes[i])/k instâncias em cada fold
-            numk = 0
             for j in range(len(classes[i])):
                 if numk == k: numk = 0
                 kfolds[numk].append(classes[i][j])
@@ -84,7 +85,8 @@ def cross_validation(dataset, k):
                         freqcount[k] += 1
             print('fold {} counts'.format(i))
             for j in range(num_outputs):
-                print(freqcount[j])"""
+                print(freqcount[j])
+            print(f'Total: {len(kfolds[i])}\n')"""
 
         return kfolds
 
