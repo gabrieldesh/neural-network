@@ -3,88 +3,89 @@ import math
 import copy
 
 def cross_validation(dataset, k):
-    partitions = []
-    kFolds = []
-    training_dict = []
-    test_dict = []
-    fold_dict = []
+    
+    dlen = len(dataset)
+    num_outputs = len(dataset[0]['output'])
+    kfolds = {}
 
-    data = dataset['data']
-
-    len_data = len(data)
-    #Define o número de instâncias em cada fold
-    instancesPerFold = len_data/k
-    
-    if instancesPerFold < 2:
-        raise Exception("Quantidade de folds muito grande para o conjunto de dados")
-    
-    print('Generating kFolds...')
-    
-    instancesPerFold = round(instancesPerFold)
-    
-    #Ordena o dataset - onde columns é a classe e count é a frequencia de cada instancia
-    columns = dataset['target']
-    count = data[columns].value_counts()
-    data = data.sort_values(by=columns)
-    count = count.sort_index()
-    count = count.tolist()
-    
-    start = 0
-    end = len_data
-    aux = []
-    #Divide o dataset no numero de classes onde cada classe n possui n/k instancias 
-    for j in range(len(count)):
-        instances = int(round(count[j]/k))
-        aux = [data[i:i+instances] for i in range(start, end, instances)]
-        start = start + count[j]
-        partitions.append(aux)
-            
-    
-    trainingSet = []
-    fold = []
-    #Tenta acessar cada particao pra pegar o primeiro de cada classe e formar um fold
+    # cria k folds
     for i in range(k):
-        testSet = []
+        kfolds[i] = []
 
-        #Insere o primeiro de cada partition pra fazer o cross-validation estratificado 
-        for j in  range(len(partitions)):
-            testSet.append(partitions[j][i])
+    # CASO 1: só há 1 output, e ele é zero ou um
+    if num_outputs == 1:
 
-        #Copia o dataset para trainingSet   
-        trainingSet = copy.deepcopy(partitions[0])
-        #Concatena para normalizar 
-        testSet = pandas.concat(testSet) 
-        trainingSet = pandas.concat(trainingSet)
-        #Exclui o conjunto de dados usado por testSet 
-        trainingSet = trainingSet[~trainingSet.apply(tuple,1).isin(testSet.apply(tuple,1))] 
-
-        trainingSet = trainingSet.reset_index(drop=True)
-        testSet = testSet.reset_index(drop=True)
-
-        training_dict = {
-            'data': trainingSet,
-            'attributes': dataset['attributes'],
-            'target': dataset['target']
-        }
+        # divide o conjunto original em 2 classes: 0 e 1
+        class0 = []
+        class1 = []
+        #print(dlen)
+        for j in range(dlen):
+            if dataset[j]['output'][0][0] == 1.0:
+                class1.append(dataset[j])
+            else:
+                class0.append(dataset[j])
+        #print(len(class0))
+        #print(len(class1))        
         
-        test_dict = {
-            'data': testSet,
-            'attributes': dataset['attributes'],
-            'target': dataset['target']
-        }
-        
-        fold_dict = {
-            'trainingSet': training_dict,
-            'testSet': test_dict
-        }
+        # coloca len(class1)/k instancias com output=1 em cada fold
+        # coloca len(class0)/k instancias com output=0 em cada fold
+        numk = 0
+        for i in range(len(class1)):
+            if numk == k: numk = 0
+            kfolds[numk].append(class1[i])
+            numk += 1
+        numk = 0
+        for i in range(len(class0)):
+            if numk == k: numk = 0
+            kfolds[numk].append(class0[i])
+            numk += 1
 
-        #print("testSet:\n",testSet)
-        #print("trainingSet:\n", trainingSet)
-        
-        kFolds.insert(k, fold_dict)      
-        
-    
+        """for i in range(k): # DEBUG CODE
+            freq0count = 0
+            freq1count = 0
+            for j in range(len(kfolds[i])):
+                if kfolds[i][j]['output'][0][0] == 1.0:
+                    freq1count += 1
+                else:
+                    freq0count += 1
+            print('fold {} counts'.format(i))
+            print(freq0count)
+            print(freq1count)"""
+        return kfolds
 
-    #print(kFolds)
+    # CASO 2: há mais de 1 output, deve-se preservar a quantidades de instancias "1" de cada output em cada fold
+    elif num_outputs > 1:
+
+        #divide o conjunto original em 'num_outputs' classes
+        classes = {}
+        for i in range(num_outputs):
+            classes[i] = []
+        for i in range(dlen):
+            for j in range(num_outputs):
+                if dataset[i]['output'][j][0] == 1.0:
+                    classes[j].append(dataset[i])
+        
+        for i in range(num_outputs):
+
+            # coloca len(classes[i])/k instâncias em cada fold
+            numk = 0
+            for j in range(len(classes[i])):
+                if numk == k: numk = 0
+                kfolds[numk].append(classes[i][j])
+                numk += 1
+
+        """for i in range(k): # DEBUG CODE
+            freqcount = {}
+            for j in range(num_outputs):
+                freqcount[j] = 0
+            for j in range(len(kfolds[i])):
+                for k in range(num_outputs):
+                    if kfolds[i][j]['output'][k][0] == 1.0:
+                        freqcount[k] += 1
+            print('fold {} counts'.format(i))
+            for j in range(num_outputs):
+                print(freqcount[j])"""
+
+        return kfolds
+
     print('kFolds successfully generated.')
-    return kFolds
