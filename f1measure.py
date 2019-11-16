@@ -1,99 +1,85 @@
 import cross_validation as cv
 from train import backpropagation
-from predict import predict_all
+from predict import classify_all
 
 def eval_confusion_matrices(dataset, initial_weights, regularization,
                             learning_rate, momentum, batch_size, k):
 
     cvset = cv.cross_validation(dataset,k)
-    
-    results = {}
+    confusion_matrices = {}
+    num_outputs = len(cvset[0]['testSet'][0]['output'])        
+    for i in range(num_outputs):
+        confusion_matrices[i] = {
+            'vp': 0,
+            'fp': 0,
+            'vn': 0,
+            'fn': 0,
+            'sum': 0
+        }
     for i in range(k):
-        target = cvset[i]['testSet']['target']
-        print('Generating neural net for the k-fold {}'.format(i))
-        weights = backpropagation(cvset[i]['trainingSet'], initial_weights, regularization,
-                                              learning_rate, momentum, batch_size)
-        predictions = predict_all(cvset[i]['testSet'], weights)
-        result = {}
-        vals = []
-        for val in cvset[i]['testSet']['attributes'][target]['values']:
-            vals.append(val)
-            counts = {}
-            for val2 in cvset[i]['testSet']['attributes'][target]['values']:
-                counts[val2] = 0
-            # a linha abaixo conserta um bug
-            cvset[i]['testSet']['data'][target] = cvset[i]['testSet']['data'][target].astype('category')
-            for j in range(len(cvset[i]['testSet']['data'])):
-                if str(cvset[i]['testSet']['data'].iloc[j][target]) == str(val):
-                    counts[str(predictions[j])] = counts[str(predictions[j])] + 1
-            result[val] = counts
-        results[i] = result
-    
-    return {
-        'vals' : vals,
-        'results': results
-    }
-
-def summarize_matrices(confusion_matrices):
-
-    cmatrix = {}
-    for i in range(len(confusion_matrices['vals'])):
-        #print('\nClasse considerada positiva: {}'.format(confusion_matrices['vals'][i]))
-        vp = 0
-        fp = 0
-        vn = 0
-        fn = 0
-        for j in range(len(confusion_matrices['results'])):
-            #print(confusion_matrices['results'][j])
-            for k in range(len(confusion_matrices['vals'])):
-                #print(confusion_matrices['vals'][k],confusion_matrices['results'][j][confusion_matrices['vals'][k]])
-                for l in range(len(confusion_matrices['vals'])):
-                    #print(confusion_matrices['results'][j][confusion_matrices['vals'][k]][confusion_matrices['vals'][l]])
-                    #print(confusion_matrices['vals'][i] == confusion_matrices['vals'][k])
-                    #print(confusion_matrices['vals'][i] == confusion_matrices['vals'][l])
-                    # verdadeiro positivo
-                    if confusion_matrices['vals'][i] == confusion_matrices['vals'][k] and confusion_matrices['vals'][i] == confusion_matrices['vals'][l]:
-                        vp = vp + confusion_matrices['results'][j][confusion_matrices['vals'][k]][confusion_matrices['vals'][l]]
-                    # falso negativo
-                    if confusion_matrices['vals'][i] == confusion_matrices['vals'][k] and not confusion_matrices['vals'][i] == confusion_matrices['vals'][l]:
-                        fn = fn + confusion_matrices['results'][j][confusion_matrices['vals'][k]][confusion_matrices['vals'][l]]
-                    # falso positivo
-                    if not confusion_matrices['vals'][i] == confusion_matrices['vals'][k] and confusion_matrices['vals'][i] == confusion_matrices['vals'][l]:
-                        fp = fp + confusion_matrices['results'][j][confusion_matrices['vals'][k]][confusion_matrices['vals'][l]]
-                    # verdadeiro negativo
-                    if not confusion_matrices['vals'][i] == confusion_matrices['vals'][k] and not confusion_matrices['vals'][i] == confusion_matrices['vals'][l]:
-                        vn = vn + confusion_matrices['results'][j][confusion_matrices['vals'][k]][confusion_matrices['vals'][l]]
-        summary = { 'vp' : vp, 'fn': fn, 'fp': fp, 'vn': vn, 'summ': vp+fn+fp+vn}
-        cmatrix[confusion_matrices['vals'][i]] = summary
-
-    return cmatrix
-
+        w = backpropagation(cvset[i]['trainingSet'], initial_weights,
+                            regularization, learning_rate, momentum, batch_size)
+        classifications = classify_all(cvset[i]['testSet'], w)        
+        num_test_instances = len(cvset[i]['testSet'])        
+        for j in range(num_test_instances):
+            for k in range(num_outputs):
+                confusion_matrices[k]['sum'] += 1
+                if cvset[i]['testSet'][j]['output'][k][0] == 1.0:
+                    if classifications[j][k] == 1.0: confusion_matrices[k]['vp'] += 1
+                    else: confusion_matrices[k]['fn'] += 1
+                else:
+                    if classifications[j][k] == 1.0: confusion_matrices[k]['fp'] += 1
+                    else: confusion_matrices[k]['vn'] += 1
+    return confusion_matrices
+        
+                
 def eval_f1measure(confusion_matrices, positive_class = None):
 
-    cm = summarize_matrices(confusion_matrices)
+    cm = confusion_matrices
     hits = 0
 
     for key in cm:
         hits += cm[key]['vp']
 
-    for key in cm:
+    results = {
+        'acc': 0,
+        'rec': 0,
+        'prec': 0,
+        'spec': 0
+    }
 
-        if positive_class == None or positive_class == key:
-
-            print('\nResumo estatístico considerando {} como classe positiva:'.format(key))
-            vp = cm[key]['vp']
-            fp = cm[key]['fp']
-            vn = cm[key]['vn']
-            fn = cm[key]['fn']
-            summ = cm[key]['summ']
-            accuracy = float(hits) / float(summ)
+    for key in cm:        
+        vp = cm[key]['vp']
+        fp = cm[key]['fp']
+        vn = cm[key]['vn']
+        fn = cm[key]['fn']
+        summ = cm[key]['sum']
+        recall = 0.0
+        precision = 0.0
+        specificity = 0.0    
+        accuracy = float(hits) / float(summ)
+        if vp + fn > 0.0:
             recall = float(vp) / float(vp + fn)
+        if vp + fp > 0.0:
             precision = float(vp) / float(vp+fp)
+        if vn + fn > 0.0:
             specificity = float(vn) / float(vn+fp)
-            f1m = float(2 * float(precision * recall) / float(precision + recall))
-            print('\nF1 measure: {}'.format(f1m))
-            print('Acurácia: {}'.format(accuracy))
-            print('Sensibilidade (recall): {}'.format(recall))
-            print('Precisão: {}'.format(precision))
-            print('Especificidade: {}'.format(specificity))
-            print('Matriz de confusão: VP {}, FP {}, VN {}, FN {}'.format(vp,fp,vn,fn))
+        #if precision + recall > 0.0:
+        #    f1m = float(2 * float(precision * recall) / float(precision + recall))
+        #print('Matriz de confusão: VP {}, FP {}, VN {}, FN {}'.format(vp,fp,vn,fn))
+        results['acc'] += accuracy
+        results['rec'] += recall
+        results['prec'] += precision
+        results['spec'] += specificity
+    print('\nResultados:')
+    num_outputs = len(confusion_matrices)    
+    results['acc'] = results['acc'] / num_outputs
+    results['rec'] = results['rec'] / num_outputs
+    results['prec'] = results['prec'] / num_outputs
+    results['spec'] = results['spec'] / num_outputs
+    results['f1m'] = float(2 * float(results['prec'] * results['rec']) / float(results['prec'] + results['rec']))
+    print('\nF1 measure: {}'.format(results['f1m']))
+    print('Acurácia: {}'.format(results['acc']))
+    print('Sensibilidade (recall): {}'.format(results['rec']))
+    print('Precisão: {}'.format(results['prec']))
+    print('Especificidade: {}'.format(results['spec']))

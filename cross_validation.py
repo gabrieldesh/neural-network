@@ -1,6 +1,7 @@
 import pandas
 import math
 import copy
+from normalize import normalize_features
 
 def cross_validation(dataset, k):
     
@@ -51,8 +52,6 @@ def cross_validation(dataset, k):
             print(freq0count)
             print(freq1count)
             print(f'Total: {len(kfolds[i])}\n')"""
-            
-        return kfolds
 
     # CASO 2: há mais de 1 output, deve-se preservar a quantidades de instancias "1" de cada output em cada fold
     elif num_outputs > 1:
@@ -88,6 +87,20 @@ def cross_validation(dataset, k):
                 print(freqcount[j])
             print(f'Total: {len(kfolds[i])}\n')"""
 
-        return kfolds
+    for i in range(k):
+        normalize_features(kfolds[i])
+
+    cvset = {}
+    for i in range(k):
+        testSet = []
+        trainingSet = []
+        for j in range(k):            
+            if i == j: testSet.extend(kfolds[i])
+            else: trainingSet.extend(kfolds[i])
+        cvset[i] = {
+            'testSet': testSet,
+            'trainingSet': trainingSet
+        }
+    return cvset
 
     print('kFolds successfully generated.')
