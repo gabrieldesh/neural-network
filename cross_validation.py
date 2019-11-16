@@ -102,5 +102,3 @@ def cross_validation(dataset, k):
             'trainingSet': trainingSet
         }
     return cvset
-
-    print('kFolds successfully generated.')
