@@ -38,8 +38,6 @@ dataset = load.load_dataset(dataset_name)
 network = load.load_network_structure(network_filename)
 initial_weights = generate_random_weights(network['layer_sizes'])
 
-backpropagation(dataset, initial_weights, network['regularization'], learning_rate, momentum, batch_size)
-
 confusion_matrices = f1.eval_confusion_matrices(dataset, initial_weights, network['regularization'],
                                                  learning_rate, momentum, batch_size, k)
 f1.eval_f1measure(confusion_matrices)
