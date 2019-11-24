@@ -7,7 +7,12 @@ def J(dataset, weights, regularization):
     x = instance['input']
     y = instance['output']
     fx = predict(x, weights)
-    errors = -y * np.log(fx) - (1 - y) * np.log(1 - fx)
+
+    # Ignora erro ao calcular log(0) e multiplicar por inf.
+    with np.errstate(divide='ignore', invalid='ignore'):
+      errors = -y * np.log(fx) - (1 - y) * np.log(1 - fx)
+
+    errors[np.isnan(errors)] = 0.0 # Substitui NaN por 0.
     sum += np.sum(errors) # Soma erros de cada saída.  
   mean_error = sum / len(dataset)
 
