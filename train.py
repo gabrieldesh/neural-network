@@ -40,7 +40,7 @@ def calculate_gradients(dataset, start_index, batch_size, weights, regularizatio
   return D
 
 
-def backpropagation(dataset, initial_weights, regularization, learning_rate, momentum, batch_size, 
+def backpropagation(training_set, test_set, initial_weights, regularization, learning_rate, momentum, batch_size, 
                     print_results = False):
   start_index = 0
 
@@ -54,7 +54,7 @@ def backpropagation(dataset, initial_weights, regularization, learning_rate, mom
   for weight_matrix in weights:
     z.append(np.zeros(weight_matrix.shape))
   
-  best_cost = J(dataset, weights, regularization)
+  best_cost = J(test_set, weights, regularization)
   best_weights = []
   for weight_matrix in weights:
     best_weights.append(np.array(weight_matrix))
@@ -65,14 +65,14 @@ def backpropagation(dataset, initial_weights, regularization, learning_rate, mom
   num_iterations_without_improvement = 0
   while num_iterations_without_improvement < 10:
 
-    gradients = calculate_gradients(dataset, start_index, batch_size, weights, regularization)
+    gradients = calculate_gradients(training_set, start_index, batch_size, weights, regularization)
 
     # Atualiza os pesos
     for k in range(len(gradients)):
       z[k] = momentum * z[k] + gradients[k]
       weights[k] = weights[k] - learning_rate * z[k]
     
-    new_cost = J(dataset, weights, regularization)
+    new_cost = J(test_set, weights, regularization)
     costs.append(new_cost)
     if new_cost < best_cost:
       # Considera apenas melhorias significativas
@@ -89,7 +89,7 @@ def backpropagation(dataset, initial_weights, regularization, learning_rate, mom
     else:
       num_iterations_without_improvement += 1
 
-    start_index = (start_index + batch_size) % len(dataset)
+    start_index = (start_index + batch_size) % len(training_set)
 
   if print_results:
     print("Treinamento concluído. Custos:")

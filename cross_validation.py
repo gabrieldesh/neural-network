@@ -87,9 +87,6 @@ def cross_validation(dataset, k):
                 print(freqcount[j])
             print(f'Total: {len(kfolds[i])}\n')"""
 
-    for i in range(k):
-        normalize_features(kfolds[i])
-
     cvset = {}
     for i in range(k):
         testSet = []
@@ -97,8 +94,14 @@ def cross_validation(dataset, k):
         for j in range(k):            
             if i == j: testSet.extend(kfolds[i])
             else: trainingSet.extend(kfolds[i])
+        normalize_features(testSet)
+        normalize_features(trainingSet)
         cvset[i] = {
             'testSet': testSet,
             'trainingSet': trainingSet
         }
     return cvset
+
+def holdout(dataset):
+    # Retorna apenas o primeiro par de conjuntos treinamento/teste do cross validation.
+    return cross_validation(dataset, 3)[0]

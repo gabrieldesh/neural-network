@@ -6,6 +6,7 @@ import load
 from train import backpropagation
 from random_weights import generate_random_weights
 from normalize import normalize_features
+from cross_validation import holdout
 
 
 if len(sys.argv) >= 3:
@@ -45,5 +46,8 @@ print(f"momentum: {momentum}")
 print(f"batch size: {batch_size}")
 print(f"random seed: {seed}")
 
+holdout_sets = holdout(dataset)
+
 print(f"Iniciando treinamento")
-backpropagation(dataset, initial_weights, network['regularization'], learning_rate, momentum, batch_size, True)
+backpropagation(holdout_sets['trainingSet'], holdout_sets['testSet'], initial_weights, 
+                network['regularization'], learning_rate, momentum, batch_size, print_results = True)

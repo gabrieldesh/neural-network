@@ -18,7 +18,7 @@ def eval_confusion_matrices(dataset, initial_weights, regularization,
             'sum': 0
         }
     for i in range(k):
-        w = backpropagation(cvset[i]['trainingSet'], initial_weights,
+        w = backpropagation(cvset[i]['trainingSet'], cvset[i]['testSet'], initial_weights,
                             regularization, learning_rate, momentum, batch_size)
         classifications = classify_all(cvset[i]['testSet'], w)        
         num_test_instances = len(cvset[i]['testSet'])        
