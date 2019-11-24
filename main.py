@@ -1,5 +1,5 @@
 import sys
-import f1measure2 as f1
+import f1measure as f1
 import random
 import numpy
 import load
