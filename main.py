@@ -23,20 +23,29 @@ if len(sys.argv) >= 3:
     k = 5
     if len(sys.argv) >= 7:
         k = int(sys.argv[6])
-    seed = None
+    seed = 0
     if len(sys.argv) >= 8:
         seed = int(sys.argv[7])
 else:
     print("\nUsage:\t python main.py network dataset [learning_rate] [momentum] [batch_size] [k] [seed]\n")
     sys.exit()
 
-if (seed != None):
-    random.seed(seed)
-    numpy.random.seed(seed)
+numpy.random.seed(seed)
 
 dataset = load.load_dataset(dataset_name)
 network = load.load_network_structure(network_filename)
 initial_weights = generate_random_weights(network['layer_sizes'])
+
+print("Entradas:")
+print(f"dataset: {dataset_name}")
+print(f"layer sizes: {network['layer_sizes']}")
+print(f"regularization: {network['regularization']}")
+print(f"learning rate: {learning_rate}")
+print(f"momentum: {momentum}")
+print(f"batch size: {batch_size}")
+print(f"num. folds (k): {k}")
+print(f"random seed: {seed}")
+
 
 confusion_matrices = f1.eval_confusion_matrices(dataset, initial_weights, network['regularization'],
                                                  learning_rate, momentum, batch_size, k)
