@@ -1,5 +1,6 @@
 import sys
 import f1measure as f1
+import f1measure2 as f1_2
 import random
 import numpy
 import load
@@ -46,7 +47,11 @@ print(f"batch size: {batch_size}")
 print(f"num. folds (k): {k}")
 print(f"random seed: {seed}")
 
-
-confusion_matrices = f1.eval_confusion_matrices(dataset, initial_weights, network['regularization'],
+if network['layer_sizes'][len(network['layer_sizes'])-1] == 1:
+    confusion_matrices = f1.eval_confusion_matrices(dataset, initial_weights, network['regularization'],
                                                  learning_rate, momentum, batch_size, k)
-f1.eval_f1measure(confusion_matrices)
+    f1.eval_f1measure(confusion_matrices)
+else:
+    confusion_matrices = f1_2.eval_confusion_matrices(dataset, initial_weights, network['regularization'],
+                                                 learning_rate, momentum, batch_size, k)
+    f1_2.eval_f1measure(confusion_matrices)

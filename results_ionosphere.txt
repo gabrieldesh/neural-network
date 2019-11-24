@@ -1,0 +1,212 @@
+-----------------------------------------------------------------------------------------------------------------------------------
+MELHOR CONFIGURAÇÃO
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 0.8 20 10
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 17, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+
+Resultados:
+
+F1 measure: 0.9977827050997783
+Acurácia: 0.6410256410256411
+Sensibilidade (recall): 1.0
+Precisão: 0.995575221238938
+Especificidade: 0.9920634920634921
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 0.5 20 10
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 20, 10, 5, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 0.5
+batch size: 20
+num. folds (k): 10
+random seed: 0
+
+Resultados:
+
+F1 measure: 0.9655172413793103
+Acurácia: 0.6381766381766382
+Sensibilidade (recall): 0.9955555555555555
+Precisão: 0.9372384937238494
+Especificidade: 0.8809523809523809
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 0.8 20 10
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 20, 10, 5, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+
+Resultados:
+
+F1 measure: 0.9572649572649573
+Acurácia: 0.6381766381766382
+Sensibilidade (recall): 0.9955555555555555
+Precisão: 0.9218106995884774
+Especificidade: 0.8492063492063492
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 1.0 20 10
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 20, 10, 5, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 1.0
+batch size: 20
+num. folds (k): 10
+random seed: 0
+
+Resultados:
+
+F1 measure: 0.7812500000000001
+Acurácia: 0.6410256410256411
+Sensibilidade (recall): 1.0
+Precisão: 0.6410256410256411
+Especificidade: 0.0
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 0.8 5 10
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 17, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 0.8
+batch size: 5
+num. folds (k): 10
+random seed: 0
+
+Resultados:
+
+F1 measure: 0.81947261663286
+Acurácia: 0.5754985754985755
+Sensibilidade (recall): 0.8977777777777778
+Precisão: 0.753731343283582
+Especificidade: 0.47619047619047616
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 0.8 10 10
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 17, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 0.8
+batch size: 10
+num. folds (k): 10
+random seed: 0
+
+Resultados:
+
+F1 measure: 0.9511677282377919
+Acurácia: 0.6381766381766382
+Sensibilidade (recall): 0.9955555555555555
+Precisão: 0.9105691056910569
+Especificidade: 0.8253968253968254
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 1.0 5 10
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 17, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 1.0
+batch size: 5
+num. folds (k): 10
+random seed: 0
+
+Resultados:
+
+F1 measure: 0.8267716535433071
+Acurácia: 0.5982905982905983
+Sensibilidade (recall): 0.9333333333333333
+Precisão: 0.7420494699646644
+Especificidade: 0.42063492063492064
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 1.0 10 10
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 17, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 1.0
+batch size: 10
+num. folds (k): 10
+random seed: 0
+
+Resultados:
+
+F1 measure: 0.8544061302681993
+Acurácia: 0.6353276353276354
+Sensibilidade (recall): 0.9911111111111112
+Precisão: 0.7508417508417509
+Especificidade: 0.4126984126984127
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 1.0 20 10
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 17, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 1.0
+batch size: 20
+num. folds (k): 10
+random seed: 0
+
+Resultados:
+
+F1 measure: 0.8803245436105477
+Acurácia: 0.6182336182336182
+Sensibilidade (recall): 0.9644444444444444
+Precisão: 0.8097014925373134
+Especificidade: 0.5952380952380952
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 0.8 20 10
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 17, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+
+Resultados:
+
+F1 measure: 0.9977827050997783
+Acurácia: 0.6410256410256411
+Sensibilidade (recall): 1.0
+Precisão: 0.995575221238938
+Especificidade: 0.9920634920634921
+
+-----------------------------------------------------------------------------------------------------------------------------------
