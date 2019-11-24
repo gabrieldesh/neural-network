@@ -40,7 +40,8 @@ def calculate_gradients(dataset, start_index, batch_size, weights, regularizatio
   return D
 
 
-def backpropagation(dataset, initial_weights, regularization, learning_rate, momentum, batch_size):
+def backpropagation(dataset, initial_weights, regularization, learning_rate, momentum, batch_size, 
+                    print_results = False):
   start_index = 0
 
   # Copia matrizes de initial_weights
@@ -53,12 +54,14 @@ def backpropagation(dataset, initial_weights, regularization, learning_rate, mom
   for weight_matrix in weights:
     z.append(np.zeros(weight_matrix.shape))
   
-  # Treina até que ocorram muitas iterações sem melhoria significativa
   best_cost = J(dataset, weights, regularization)
   best_weights = []
   for weight_matrix in weights:
     best_weights.append(np.array(weight_matrix))
   
+  costs = [best_cost]
+
+  # Treina até que ocorram muitas iterações sem melhoria significativa
   num_iterations_without_improvement = 0
   while num_iterations_without_improvement < 10:
 
@@ -70,17 +73,31 @@ def backpropagation(dataset, initial_weights, regularization, learning_rate, mom
       weights[k] = weights[k] - learning_rate * z[k]
     
     new_cost = J(dataset, weights, regularization)
-    if new_cost < best_cost and float(best_cost - new_cost) > float(best_cost*0.001):
+    costs.append(new_cost)
+    if new_cost < best_cost:
+      # Considera apenas melhorias significativas
+      if float(best_cost - new_cost) > 1e-5:
+        num_iterations_without_improvement = 0
+      else:
+        num_iterations_without_improvement += 1
+      
       best_cost = new_cost
 
       best_weights = []
       for weight_matrix in weights:
         best_weights.append(np.array(weight_matrix))
-
-      num_iterations_without_improvement = 0
     else:
       num_iterations_without_improvement += 1
 
     start_index = (start_index + batch_size) % len(dataset)
+
+  if print_results:
+    print("Treinamento concluído. Custos:")
+    for cost in costs:
+      print(cost)
+
+    print(f"\nMelhor custo encontrado: {best_cost}")
+    print("Melhores pesos encontrados:")
+    print_matrices(best_weights)
 
   return best_weights

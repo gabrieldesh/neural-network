@@ -27,7 +27,7 @@ if len(sys.argv) >= 3:
     if len(sys.argv) >= 8:
         seed = int(sys.argv[7])
 else:
-    print("\nUsage:\t python main.py network dataset [learning_rate] [momentum] [batch_size] [k] [seed]\n")
+    print("\nUsage:\t python validation.py network dataset [learning_rate] [momentum] [batch_size] [k] [seed]\n")
     sys.exit()
 
 numpy.random.seed(seed)
