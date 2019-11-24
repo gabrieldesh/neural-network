@@ -109,149 +109,56 @@ Desvio Padrão Especificidade: 0.0
 
 -----------------------------------------------------------------------------------------------------------------------------------
 
-rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 1.0 20 10
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/wine_0.txt datasets/wine.txt 1.0 0.8 50 10
 Entradas:
-dataset: datasets/ionosphere.txt
-layer sizes: [34, 20, 10, 5, 1]
-regularization: 0.0
-learning rate: 1.0
-momentum: 1.0
-batch size: 20
-num. folds (k): 10
-random seed: 0
-
-Resultados:
-
-F1 measure: 0.7812500000000001
-Acurácia: 0.6410256410256411
-Sensibilidade (recall): 1.0
-Precisão: 0.6410256410256411
-Especificidade: 0.0
-
------------------------------------------------------------------------------------------------------------------------------------
-
-rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 0.8 5 10
-Entradas:
-dataset: datasets/ionosphere.txt
-layer sizes: [34, 17, 1]
-regularization: 0.0
+dataset: datasets/wine.txt
+layer sizes: [13, 10, 5, 3]
+regularization: 0.25
 learning rate: 1.0
 momentum: 0.8
-batch size: 5
+batch size: 50
 num. folds (k): 10
 random seed: 0
 
 Resultados:
 
-F1 measure: 0.81947261663286
-Acurácia: 0.5754985754985755
-Sensibilidade (recall): 0.8977777777777778
-Precisão: 0.753731343283582
-Especificidade: 0.47619047619047616
+F1 measure: 0.9948199948199948
+Acurácia: 0.9943820224719101
+Sensibilidade (recall): 0.9943502824858758
+Precisão: 0.9953703703703703
+Especificidade: 0.9968847352024922
+
+Desvio Padrão F1 measure: 0.00539579690831426
+Desvio Padrão Acurácia: 0.0
+Desvio Padrão Sensibilidade (recall): 0.009785597782874987
+Desvio Padrão Precisão: 0.008018753738744774
+Desvio Padrão Especificidade: 0.00539579690831426
 
 -----------------------------------------------------------------------------------------------------------------------------------
 
-rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 0.8 10 10
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/wine_0.txt datasets/wine.txt 1.0 0.8 30 10
 Entradas:
-dataset: datasets/ionosphere.txt
-layer sizes: [34, 17, 1]
-regularization: 0.0
+dataset: datasets/wine.txt
+layer sizes: [13, 10, 5, 3]
+regularization: 0.25
 learning rate: 1.0
 momentum: 0.8
-batch size: 10
+batch size: 30
 num. folds (k): 10
 random seed: 0
 
 Resultados:
 
-F1 measure: 0.9511677282377919
-Acurácia: 0.6381766381766382
-Sensibilidade (recall): 0.9955555555555555
-Precisão: 0.9105691056910569
-Especificidade: 0.8253968253968254
+F1 measure: 0.799533951936698
+Acurácia: 0.7134831460674157
+Sensibilidade (recall): 0.727353054295642
+Precisão: 0.9054726368159204
+Especificidade: 0.940809968847352
 
------------------------------------------------------------------------------------------------------------------------------------
-
-rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 1.0 5 10
-Entradas:
-dataset: datasets/ionosphere.txt
-layer sizes: [34, 17, 1]
-regularization: 0.0
-learning rate: 1.0
-momentum: 1.0
-batch size: 5
-num. folds (k): 10
-random seed: 0
-
-Resultados:
-
-F1 measure: 0.8267716535433071
-Acurácia: 0.5982905982905983
-Sensibilidade (recall): 0.9333333333333333
-Precisão: 0.7420494699646644
-Especificidade: 0.42063492063492064
-
------------------------------------------------------------------------------------------------------------------------------------
-
-rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 1.0 10 10
-Entradas:
-dataset: datasets/ionosphere.txt
-layer sizes: [34, 17, 1]
-regularization: 0.0
-learning rate: 1.0
-momentum: 1.0
-batch size: 10
-num. folds (k): 10
-random seed: 0
-
-Resultados:
-
-F1 measure: 0.8544061302681993
-Acurácia: 0.6353276353276354
-Sensibilidade (recall): 0.9911111111111112
-Precisão: 0.7508417508417509
-Especificidade: 0.4126984126984127
-
------------------------------------------------------------------------------------------------------------------------------------
-
-rafa@note:~/ufrgs/neural-network$ python3 main.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 1.0 20 10
-Entradas:
-dataset: datasets/ionosphere.txt
-layer sizes: [34, 17, 1]
-regularization: 0.0
-learning rate: 1.0
-momentum: 1.0
-batch size: 20
-num. folds (k): 10
-random seed: 0
-
-Resultados:
-
-F1 measure: 0.8803245436105477
-Acurácia: 0.6182336182336182
-Sensibilidade (recall): 0.9644444444444444
-Precisão: 0.8097014925373134
-Especificidade: 0.5952380952380952
-
------------------------------------------------------------------------------------------------------------------------------------
-
-rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/ionosphere_0.txt datasets/ionosphere.txt 1.0 0.8 20 10
-Entradas:
-dataset: datasets/ionosphere.txt
-layer sizes: [34, 17, 1]
-regularization: 0.0
-learning rate: 1.0
-momentum: 0.8
-batch size: 20
-num. folds (k): 10
-random seed: 0
-
-Resultados:
-
-F1 measure: 0.9977827050997783
-Acurácia: 0.6410256410256411
-Sensibilidade (recall): 1.0
-Precisão: 0.995575221238938
-Especificidade: 0.9920634920634921
+Desvio Padrão F1 measure: 0.10252014125797095
+Desvio Padrão Acurácia: 0.0
+Desvio Padrão Sensibilidade (recall): 0.14958098961426491
+Desvio Padrão Precisão: 0.16372619574034167
+Desvio Padrão Especificidade: 0.10252014125797095
 
 -----------------------------------------------------------------------------------------------------------------------------------

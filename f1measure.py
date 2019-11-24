@@ -40,6 +40,7 @@ def eval_f1measure(confusion_matrices, positive_class = None):
 
     for key in cm:
         hits += cm[key]['vp']
+        hits += cm[key]['vn']
 
     results = {
         'acc': 0,
@@ -66,7 +67,7 @@ def eval_f1measure(confusion_matrices, positive_class = None):
             specificity = float(vn) / float(vn+fp)
         #if precision + recall > 0.0:
         #    f1m = float(2 * float(precision * recall) / float(precision + recall))
-        #print('Matriz de confusão: VP {}, FP {}, VN {}, FN {}'.format(vp,fp,vn,fn))
+        print('Matriz de confusão: VP {}, FP {}, VN {}, FN {}'.format(vp,fp,vn,fn))
         results['acc'] += accuracy
         results['rec'] += recall
         results['prec'] += precision
@@ -77,7 +78,10 @@ def eval_f1measure(confusion_matrices, positive_class = None):
     results['rec'] = results['rec'] / num_outputs
     results['prec'] = results['prec'] / num_outputs
     results['spec'] = results['spec'] / num_outputs
-    results['f1m'] = float(2 * float(results['prec'] * results['rec']) / float(results['prec'] + results['rec']))
+    if float(results['prec'] + results['rec']) > 0.0:
+        results['f1m'] = float(2 * float(results['prec'] * results['rec']) / float(results['prec'] + results['rec']))
+    else:
+        results['f1m'] = 0.0
     print('\nF1 measure: {}'.format(results['f1m']))
     print('Acurácia: {}'.format(results['acc']))
     print('Sensibilidade (recall): {}'.format(results['rec']))
