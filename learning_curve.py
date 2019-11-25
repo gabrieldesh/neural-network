@@ -21,9 +21,12 @@ if len(sys.argv) >= 3:
     batch_size = 1
     if len(sys.argv) >= 6:
         batch_size = int(sys.argv[5])
-    seed = 0
+    k = 10
     if len(sys.argv) >= 7:
-        seed = int(sys.argv[6])
+        k = int(sys.argv[6])
+    seed = 0
+    if len(sys.argv) >= 8:
+        seed = int(sys.argv[7])
 else:
     print("\nUsage:\t python train_single_network.py network dataset [learning_rate] [momentum] [batch_size] "
           "[seed]\n")
@@ -44,9 +47,10 @@ print(f"regularization: {network['regularization']}")
 print(f"learning rate: {learning_rate}")
 print(f"momentum: {momentum}")
 print(f"batch size: {batch_size}")
+print(f"Test set proportion (1/k): 1/{k}")
 print(f"random seed: {seed}")
 
-holdout_sets = holdout(dataset)
+holdout_sets = holdout(dataset, k)
 
 print(f"Iniciando treinamento")
 backpropagation(holdout_sets['trainingSet'], holdout_sets['testSet'], initial_weights, 

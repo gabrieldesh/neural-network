@@ -102,6 +102,6 @@ def cross_validation(dataset, k):
         }
     return cvset
 
-def holdout(dataset):
+def holdout(dataset, k):
     # Retorna apenas o primeiro par de conjuntos treinamento/teste do cross validation.
-    return cross_validation(dataset, 3)[0]
+    return cross_validation(dataset, k)[0]
