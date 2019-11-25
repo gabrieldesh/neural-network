@@ -1,0 +1,60 @@
+Entradas:
+dataset: datasets/wdbc.txt
+layer sizes: [30, 15, 1]
+regularization: 0.0
+learning rate: 0.8
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 212, FP 0, VN 357, FN 0
+
+Resultados:
+
+F1 measure: 1.0
+Acurácia: 1.0
+Sensibilidade (recall): 1.0
+Precisão: 1.0
+Especificidade: 1.0
+
+-----------------------------------------------------
+
+Entradas:
+dataset: datasets/wdbc.txt
+layer sizes: [30, 15, 1]
+regularization: 0.1
+learning rate: 0.8
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 205, FP 1, VN 356, FN 7
+
+Resultados:
+
+F1 measure: 0.9808612440191388
+Acurácia: 0.9859402460456942
+Sensibilidade (recall): 0.9669811320754716
+Precisão: 0.9951456310679612
+Especificidade: 0.9971988795518207
+
+-----------------------------------------------------
+
+Entradas:
+dataset: datasets/wdbc.txt
+layer sizes: [30, 15, 1]
+regularization: 0.2
+learning rate: 0.8
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 198, FP 3, VN 354, FN 14
+
+Resultados:
+
+F1 measure: 0.9588377723970944
+Acurácia: 0.9701230228471002
+Sensibilidade (recall): 0.9339622641509434
+Precisão: 0.9850746268656716
+Especificidade: 0.9915966386554622
