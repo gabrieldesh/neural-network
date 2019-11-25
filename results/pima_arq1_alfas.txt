@@ -1,0 +1,60 @@
+Entradas:
+dataset: datasets/pima.txt
+layer sizes: [8, 4, 4, 1]
+regularization: 0.0
+learning rate: 0.5
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 42, FP 14, VN 486, FN 226
+
+Resultados:
+
+F1 measure: 0.25925925925925924
+Acurácia: 0.6875
+Sensibilidade (recall): 0.15671641791044777
+Precisão: 0.75
+Especificidade: 0.972
+
+-----------------------------------------------------
+
+Entradas:
+dataset: datasets/pima.txt
+layer sizes: [8, 4, 4, 1]
+regularization: 0.0
+learning rate: 0.8
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 22, FP 6, VN 494, FN 246
+
+Resultados:
+
+F1 measure: 0.14864864864864866
+Acurácia: 0.671875
+Sensibilidade (recall): 0.08208955223880597
+Precisão: 0.7857142857142857
+Especificidade: 0.988
+
+-----------------------------------------------------
+
+Entradas:
+dataset: datasets/pima.txt
+layer sizes: [8, 4, 4, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 21, FP 5, VN 495, FN 247
+
+Resultados:
+
+F1 measure: 0.14285714285714285
+Acurácia: 0.671875
+Sensibilidade (recall): 0.07835820895522388
+Precisão: 0.8076923076923077
+Especificidade: 0.99
