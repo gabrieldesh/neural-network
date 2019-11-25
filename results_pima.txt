@@ -1,0 +1,171 @@
+-----------------------------------------------------------------------------------------------------------------------------------
+MELHOR CONFIGURAÇÃO
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/pima_0.txt datasets/pima.txt 0.8 0.8 50 20
+Entradas:
+dataset: datasets/pima.txt
+layer sizes: [8, 4, 1]
+regularization: 0.0
+learning rate: 0.8
+momentum: 0.8
+batch size: 50
+num. folds (k): 20
+random seed: 0
+Matriz de confusão: VP 267, FP 0, VN 500, FN 1
+
+Resultados:
+
+F1 measure: 0.9981308411214954
+Acurácia: 0.9986979166666666
+Sensibilidade (recall): 0.996268656716418
+Precisão: 1.0
+Especificidade: 1.0
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/pima_0.txt datasets/pima.txt 1.0 0.8 50 20
+Entradas:
+dataset: datasets/pima.txt
+layer sizes: [8, 4, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 0.8
+batch size: 50
+num. folds (k): 20
+random seed: 0
+Matriz de confusão: VP 267, FP 1, VN 499, FN 1
+
+Resultados:
+
+F1 measure: 0.996268656716418
+Acurácia: 0.9973958333333334
+Sensibilidade (recall): 0.996268656716418
+Precisão: 0.996268656716418
+Especificidade: 0.998
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/wine_0.txt datasets/wine.txt 1.0 0.5 10 10
+Entradas:
+dataset: datasets/wine.txt
+layer sizes: [13, 8, 3]
+regularization: 0.25
+learning rate: 1.0
+momentum: 0.5
+batch size: 10
+num. folds (k): 10
+random seed: 0
+
+Resultados:
+
+F1 measure: 0.9912781590273192
+Acurácia: 0.9831460674157303
+Sensibilidade (recall): 0.9827110023606801
+Precisão: 1.0
+Especificidade: 1.0
+
+Desvio Padrão F1 measure: 0.0
+Desvio Padrão Acurácia: 0.0
+Desvio Padrão Sensibilidade (recall): 0.0033872238033870647
+Desvio Padrão Precisão: 0.0
+Desvio Padrão Especificidade: 0.0
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/pima_0.txt datasets/pima.txt 1.0 0.8 10 20
+Entradas:
+dataset: datasets/pima.txt
+layer sizes: [8, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 0.8
+batch size: 10
+num. folds (k): 20
+random seed: 0
+Matriz de confusão: VP 201, FP 42, VN 458, FN 67
+
+Resultados:
+
+F1 measure: 0.786692759295499
+Acurácia: 0.8580729166666666
+Sensibilidade (recall): 0.75
+Precisão: 0.8271604938271605
+Especificidade: 0.916
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/pima_0.txt datasets/pima.txt 0.3 0.8 10 10
+Entradas:
+dataset: datasets/pima.txt
+layer sizes: [8, 1]
+regularization: 0.0
+learning rate: 0.3
+momentum: 0.8
+batch size: 10
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 147, FP 44, VN 456, FN 121
+
+Resultados:
+
+F1 measure: 0.6405228758169934
+Acurácia: 0.78515625
+Sensibilidade (recall): 0.5485074626865671
+Precisão: 0.7696335078534031
+Especificidade: 0.912
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/wine_0.txt datasets/wine.txt 1.0 0.8 50 10
+Entradas:
+dataset: datasets/wine.txt
+layer sizes: [13, 10, 5, 3]
+regularization: 0.25
+learning rate: 1.0
+momentum: 0.8
+batch size: 50
+num. folds (k): 10
+random seed: 0
+
+Resultados:
+
+F1 measure: 0.9948199948199948
+Acurácia: 0.9943820224719101
+Sensibilidade (recall): 0.9943502824858758
+Precisão: 0.9953703703703703
+Especificidade: 0.9968847352024922
+
+Desvio Padrão F1 measure: 0.00539579690831426
+Desvio Padrão Acurácia: 0.0
+Desvio Padrão Sensibilidade (recall): 0.009785597782874987
+Desvio Padrão Precisão: 0.008018753738744774
+Desvio Padrão Especificidade: 0.00539579690831426
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/wine_0.txt datasets/wine.txt 1.0 0.8 30 10
+Entradas:
+dataset: datasets/wine.txt
+layer sizes: [13, 10, 5, 3]
+regularization: 0.25
+learning rate: 1.0
+momentum: 0.8
+batch size: 30
+num. folds (k): 10
+random seed: 0
+
+Resultados:
+
+F1 measure: 0.799533951936698
+Acurácia: 0.7134831460674157
+Sensibilidade (recall): 0.727353054295642
+Precisão: 0.9054726368159204
+Especificidade: 0.940809968847352
+
+Desvio Padrão F1 measure: 0.10252014125797095
+Desvio Padrão Acurácia: 0.0
+Desvio Padrão Sensibilidade (recall): 0.14958098961426491
+Desvio Padrão Precisão: 0.16372619574034167
+Desvio Padrão Especificidade: 0.10252014125797095
+
+-----------------------------------------------------------------------------------------------------------------------------------

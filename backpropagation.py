@@ -2,6 +2,7 @@ import sys
 import load
 from normalize import normalize_features
 from print_matrices import print_matrices
+from numeric_verification import verify
 import train
 
 

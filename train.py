@@ -76,8 +76,9 @@ def backpropagation(training_set, test_set, initial_weights, regularization, lea
     costs.append(new_cost)
     if new_cost < best_cost:
       # Considera apenas melhorias significativas
-      if float(best_cost - new_cost) > 1e-5:
+      if float(best_cost - new_cost) > 1e-4:
         num_iterations_without_improvement = 0
+        #print(new_cost)
       else:
         num_iterations_without_improvement += 1
       
