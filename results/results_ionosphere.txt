@@ -1,6 +1,27 @@
 -----------------------------------------------------------------------------------------------------------------------------------
 MELHOR CONFIGURAÇÃO
 
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 17, 1]
+regularization: 0.0
+learning rate: 0.8
+momentum: 0.3
+batch size: 20
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 225, FP 0, VN 126, FN 0
+
+Resultados:
+
+F1 measure: 1.0
+Acurácia: 1.0
+Sensibilidade (recall): 1.0
+Precisão: 1.0
+Especificidade: 1.0
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
 rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/ionosphere_0.txt datasets/ionosphere.txt 0.5 0.8 20 10
 Entradas:
 dataset: datasets/ionosphere.txt
@@ -211,3 +232,4 @@ Precisão: 0.995575221238938
 Especificidade: 0.9920634920634921
 
 -----------------------------------------------------------------------------------------------------------------------------------
+

@@ -1,0 +1,60 @@
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 17, 8, 1]
+regularization: 0.0
+learning rate: 0.5
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 225, FP 1, VN 125, FN 0
+
+Resultados:
+
+F1 measure: 0.9977827050997783
+Acurácia: 0.9971509971509972
+Sensibilidade (recall): 1.0
+Precisão: 0.995575221238938
+Especificidade: 0.9920634920634921
+
+-------------------------------------------------
+
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 17, 8, 1]
+regularization: 0.0
+learning rate: 0.8
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 225, FP 5, VN 121, FN 0
+
+Resultados:
+
+F1 measure: 0.989010989010989
+Acurácia: 0.9857549857549858
+Sensibilidade (recall): 1.0
+Precisão: 0.9782608695652174
+Especificidade: 0.9603174603174603
+
+-------------------------------------------------
+
+Entradas:
+dataset: datasets/ionosphere.txt
+layer sizes: [34, 17, 8, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 225, FP 9, VN 117, FN 0
+
+Resultados:
+
+F1 measure: 0.9803921568627451
+Acurácia: 0.9743589743589743
+Sensibilidade (recall): 1.0
+Precisão: 0.9615384615384616
+Especificidade: 0.9285714285714286
