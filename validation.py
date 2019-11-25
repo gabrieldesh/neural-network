@@ -4,6 +4,8 @@ import f1measure2 as f1_2
 import random
 import numpy
 import load
+import cost
+import cross_validation as cv
 from train import backpropagation
 from random_weights import generate_random_weights
 from normalize import normalize_features

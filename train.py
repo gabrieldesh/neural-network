@@ -97,7 +97,7 @@ def backpropagation(training_set, test_set, initial_weights, regularization, lea
       print(cost)
 
     print(f"\nMelhor custo encontrado: {best_cost}")
-    print("Melhores pesos encontrados:")
-    print_matrices(best_weights)
+    #print("Melhores pesos encontrados:")
+    #print_matrices(best_weights)
 
   return best_weights
