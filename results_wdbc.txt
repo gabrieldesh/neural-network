@@ -1,0 +1,91 @@
+-----------------------------------------------------------------------------------------------------------------------------------
+MELHOR CONFIGURAÇÃO
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/wdbc_0.txt datasets/wdbc.txt 0.5 0.8 20 10
+Entradas:
+dataset: datasets/wdbc.txt
+layer sizes: [30, 20, 10, 1]
+regularization: 0.0
+learning rate: 0.5
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 212, FP 0, VN 357, FN 0
+
+Resultados:
+
+F1 measure: 1.0
+Acurácia: 1.0
+Sensibilidade (recall): 1.0
+Precisão: 1.0
+Especificidade: 1.0
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/wdbc_0.txt datasets/wdbc.txt 0.5 0.8 5 10
+Entradas:
+dataset: datasets/wdbc.txt
+layer sizes: [30, 20, 10, 1]
+regularization: 0.0
+learning rate: 0.5
+momentum: 0.8
+batch size: 5
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 111, FP 104, VN 253, FN 101
+
+Resultados:
+
+F1 measure: 0.5199063231850116
+Acurácia: 0.6397188049209139
+Sensibilidade (recall): 0.5235849056603774
+Precisão: 0.5162790697674419
+Especificidade: 0.7086834733893558
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/wdbc_0.txt datasets/wdbc.txt 1.0 0.8 20 10
+Entradas:
+dataset: datasets/wdbc.txt
+layer sizes: [30, 20, 10, 1]
+regularization: 0.0
+learning rate: 1.0
+momentum: 0.8
+batch size: 20
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 210, FP 1, VN 356, FN 2
+
+Resultados:
+
+F1 measure: 0.9929078014184397
+Acurácia: 0.9947275922671354
+Sensibilidade (recall): 0.9905660377358491
+Precisão: 0.995260663507109
+Especificidade: 0.9971988795518207
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/wdbc_0.txt datasets/wdbc.txt 0.5 1.0 20 10
+Entradas:
+dataset: datasets/wdbc.txt
+layer sizes: [30, 20, 10, 1]
+regularization: 0.0
+learning rate: 0.5
+momentum: 1.0
+batch size: 20
+num. folds (k): 10
+random seed: 0
+Matriz de confusão: VP 77, FP 3, VN 354, FN 135
+
+Resultados:
+
+F1 measure: 0.5273972602739726
+Acurácia: 0.7574692442882249
+Sensibilidade (recall): 0.3632075471698113
+Precisão: 0.9625
+Especificidade: 0.9915966386554622
+
+-----------------------------------------------------------------------------------------------------------------------------------

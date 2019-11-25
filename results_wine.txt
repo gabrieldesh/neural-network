@@ -28,30 +28,30 @@ Desvio Padrão Especificidade: 0.0
 
 -----------------------------------------------------------------------------------------------------------------------------------
 
-rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/wine_0.txt datasets/wine.txt 1.0 0.5 10 10
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/wine_0.txt datasets/wine.txt 1.0 0.8 20 10
 Entradas:
 dataset: datasets/wine.txt
-layer sizes: [13, 8, 3]
+layer sizes: [13, 7, 3, 3]
 regularization: 0.25
 learning rate: 1.0
-momentum: 0.5
-batch size: 10
+momentum: 0.8
+batch size: 20
 num. folds (k): 10
 random seed: 0
 
 Resultados:
 
-F1 measure: 0.9912781590273192
-Acurácia: 0.9831460674157303
-Sensibilidade (recall): 0.9827110023606801
-Precisão: 1.0
-Especificidade: 1.0
+F1 measure: 0.7338293176802494
+Acurácia: 0.6123595505617978
+Sensibilidade (recall): 0.6428460120421209
+Precisão: 0.8682983682983683
+Especificidade: 0.9479829314903532
 
-Desvio Padrão F1 measure: 0.0
+Desvio Padrão F1 measure: 0.06941765323793696
 Desvio Padrão Acurácia: 0.0
-Desvio Padrão Sensibilidade (recall): 0.0033872238033870647
-Desvio Padrão Precisão: 0.0
-Desvio Padrão Especificidade: 0.0
+Desvio Padrão Sensibilidade (recall): 0.2383350463791356
+Desvio Padrão Precisão: 0.16601335760441766
+Desvio Padrão Especificidade: 0.06941765323793696
 
 -----------------------------------------------------------------------------------------------------------------------------------
 
@@ -162,3 +162,29 @@ Desvio Padrão Precisão: 0.16372619574034167
 Desvio Padrão Especificidade: 0.10252014125797095
 
 -----------------------------------------------------------------------------------------------------------------------------------
+
+rafa@note:~/ufrgs/neural-network$ python3 validation.py networks/wine_0.txt datasets/wine.txt 1.0 0.2 20 2
+Entradas:
+dataset: datasets/wine.txt
+layer sizes: [13, 3, 3]
+regularization: 0.0
+learning rate: 1.0
+momentum: 0.2
+batch size: 20
+num. folds (k): 2
+random seed: 0
+
+Resultados:
+
+F1 measure: 1.0
+Acurácia: 1.0
+Sensibilidade (recall): 1.0
+Precisão: 1.0
+Especificidade: 1.0
+
+Desvio Padrão F1 measure: 0.0
+Desvio Padrão Acurácia: 0.0
+Desvio Padrão Sensibilidade (recall): 0.0
+Desvio Padrão Precisão: 0.0
+Desvio Padrão Especificidade: 0.0
+
