@@ -18,7 +18,7 @@ if len(sys.argv) >= 3:
     momentum = 1.0
     if len(sys.argv) >= 5:
         momentum = float(sys.argv[4])
-    batch_size = 1
+    batch_size = 20
     if len(sys.argv) >= 6:
         batch_size = int(sys.argv[5])
     k = 10
@@ -28,7 +28,7 @@ if len(sys.argv) >= 3:
     if len(sys.argv) >= 8:
         seed = int(sys.argv[7])
 else:
-    print("\nUsage:\t python train_single_network.py network dataset [learning_rate] [momentum] [batch_size] "
+    print("\nUsage:\t python learning_curve.py network dataset [learning_rate] [momentum] [batch_size] [k] "
           "[seed]\n")
     sys.exit()
 

@@ -90,7 +90,7 @@ def eval_f1measure(confusion_matrices, positive_class = None):
     stdev['rec'] = statistics.stdev(results['rec'])
     stdev['prec'] = statistics.stdev(results['prec'])
     stdev['spec'] = statistics.stdev(results['spec'])
-    stdev['f1m'] = statistics.stdev(results['spec'])
+    stdev['f1m'] = statistics.stdev(results['f1m'])
 
     #Calcula as medias
     results['acc'] = statistics.mean(results['acc'])
